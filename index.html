@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Weather</title>
+    <style>
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content" style="text-align: center;">
+        <h2>Loading</h2>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="Loading" class="center">
+    </div>
+	
+    <script>
+		var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                temp = parseInt(JSON.parse(xhttp.responseText).main.temp) - 272;
+                innerHtml = `<h2>It is ${temp} degrees in Dublin</h2>`;
+                if (temp >= 20) {
+                    innerHtml += `<img src="https://i.makeagif.com/media/9-22-2015/70iiTl.gif" alt="Loading" class="center">`;
+                }
+                else if (temp >= 15) {
+                    innerHtml += `<img src="https://previews.123rf.com/images/esfirse/esfirse1806/esfirse180600028/104303294-summer-sun-smiling-face-with-sunglasses-vector-illustration-isolated-on-white-background.jpg" alt="Loading" class="center">`;
+                }
+                else if (temp >= 10) {
+                    innerHtml += `<img src="https://c7.alamy.com/comp/JBM70M/yellow-smiling-cartoon-face-wear-sunglasses-people-emotion-icon-JBM70M.jpg" alt="Loading" class="center">`;
+                }
+                else if (temp >= 5) {
+                    innerHtml += `<img src="https://www.richmondhillanimalhospital.net/wp-content/uploads/2019/01/RHAH-Dog-in-Coat-AdobeStock_231995585.jpeg" alt="Loading" class="center">`;
+                }
+                else if (temp >= 0) {
+                    innerHtml += `<img src="https://images.squarespace-cdn.com/content/55b7494ee4b0f77417ce4ec0/1446485535181-SBWNZOTS855D2N73L53Z/Baby+it%27s+cold+outside?content-type=image%2Fjpeg" alt="Loading" class="center">`;
+                }
+                else {
+                    innerHtml += `<img src="http://screenprism.com/assets/img/article/_1080x400/the_shining_-jack-frozen.jpg" alt="Loading" class="center">`;
+                }
+                
+                document.getElementById("content").innerHTML = innerHtml;
+            }
+        };
+        xhttp.open("GET", "https://api.openweathermap.org/data/2.5/weather?q=celbridge&appid=7816d9f235c88adc096427a68ca872f2", true);
+        xhttp.send();
+	</script>
+</body>
+
+</html>
